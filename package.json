@@ -4,7 +4,7 @@
   "description": "Express app boilerplate, organized for creating an API.",
   "main": "server/app.js",
   "scripts": {
-    "clean": "",
+    "clean": "rm -r ./server/models/user & rm -r ./server/routes/api/users & cat /dev/null > ./server/routes/index.js & sed -i '11,11d' ./server/startup/routes.js",
     "server": "nodemon server/app.js"
   },
   "repository": {
