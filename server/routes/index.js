@@ -3,6 +3,6 @@
  * Use these exported routes on /server/startup/routes
  */
 
-const userRoutes = require("./api/user");
+const userRoutes = require("./api/users");
 
 module.exports = { userRoutes };
