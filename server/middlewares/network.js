@@ -1,6 +1,5 @@
 const bodyParser = require("body-parser");
 const compression = require("compression");
-const winston = require("winston");
 
 const allowCrossDomain = (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -20,9 +19,6 @@ module.exports = app => {
   app.use(compression());
 
   app.use(allowCrossDomain);
-
-  console.log("yess");
-  winston.info("yyppp");
 
   // Body Parser Middleware
   app.use(bodyParser.json());

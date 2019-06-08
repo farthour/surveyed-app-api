@@ -9,8 +9,9 @@ const boom = require("@hapi/boom");
 
 module.exports = async (req, res, next) => {
   // Handle
-  console.log("handling");
-  // throw new Error("New Error");
-  throw boom.badGateway("invalid id", { a: 1 });
-  // res.status(200).send([{ username: "Rahul" }, { username: "Pankaj" }]);
+  // To throw errors, learn about 'boom' package,
+  // https://github.com/hapijs/boom/blob/HEAD/API.md
+  // next line is an example of error throwing with 'boom'
+  // throw boom.notFound("Not found");
+  res.status(200).send([{ username: "Ross" }, { username: "Rachel" }]);
 };
