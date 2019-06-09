@@ -13,14 +13,13 @@ function sendServerError(res, statusCode, err) {
   let errMessage = null;
 
   if (err.isBoom) {
-    winston.error(err.output, err);
+    winston.error({ message: err.output, metadata: err });
     errMessage = err.output.payload;
   } else {
-    winston.error(err.message, err);
+    winston.error({ message: err.message, metadata: err });
     errMessage = err.message;
   }
   res.status(statusCode).send(errMessage);
-  process.exit(1);
 }
 
 module.exports = function(err, req, res, next) {
