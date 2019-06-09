@@ -13,7 +13,7 @@ function sendServerError(res, statusCode, err) {
   let errMessage = null;
 
   if (err.isBoom) {
-    winston.error({ message: err.output, metadata: err });
+    winston.error({ message: err.output.payload.message, metadata: err });
     errMessage = err.output.payload;
   } else {
     winston.error({ message: err.message, metadata: err });
@@ -28,7 +28,7 @@ module.exports = function(err, req, res, next) {
     let { statusCode, payload } = output;
     if (isServer) return sendServerError(res, statusCode, err);
     // Log error to mongodb
-    winston.error({ message: payload.error, metadata: err });
+    winston.error({ message: payload.message, metadata: err });
     res.status(statusCode).send(payload);
   } else {
     sendServerError(res, 500, new Error("Something went wrong."));
