@@ -28,6 +28,8 @@ module.exports = function(err, req, res, next) {
     let { isServer, output } = err;
     let { statusCode, payload } = output;
     if (isServer) return sendServerError(res, statusCode, err);
+    // Log error to mongodb
+    winston.error({ message: payload.error, metadata: err });
     res.status(statusCode).send(payload);
   } else {
     sendServerError(res, 500, new Error("Something went wrong."));
