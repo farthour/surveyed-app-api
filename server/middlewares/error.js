@@ -17,7 +17,7 @@ function sendServerError(res, statusCode, err) {
     errMessage = err.output.payload;
   } else {
     winston.error({ message: err.message, metadata: err });
-    errMessage = err.message;
+    errMessage = "Something went wrong";
   }
   res.status(statusCode).send(errMessage);
 }
@@ -31,6 +31,6 @@ module.exports = function(err, req, res, next) {
     winston.error({ message: payload.message, metadata: err });
     res.status(statusCode).send(payload);
   } else {
-    sendServerError(res, 500, new Error("Something went wrong."));
+    sendServerError(res, 500, err);
   }
 };
