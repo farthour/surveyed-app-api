@@ -23,7 +23,8 @@ module.exports = function() {
   winston.add(
     new winston.transports.MongoDB({
       db: process.env.MONGODB_URI,
-      level: "error"
+      level: "error",
+      metaKey: "meta" // DO NOT CHANGE THIS PROPERTY
     })
   );
 };
