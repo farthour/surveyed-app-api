@@ -3,6 +3,7 @@ const { errorMiddleware } = require("./middlewares");
 const { ApiError } = require("../utils");
 
 const routes = require("../routes");
+const logger = require("../config/logger");
 
 module.exports = function (app) {
   // v1 api routes

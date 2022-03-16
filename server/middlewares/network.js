@@ -23,10 +23,4 @@ module.exports = (app) => {
 
   // enable cors
   app.use(cors(corsOptions));
-
-  // app.use(allowCrossDomain);
-
-  // Body Parser Middleware
-  // app.use(bodyParser.json());
-  // app.use(bodyParser.urlencoded({ extended: false }));
 };
