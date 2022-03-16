@@ -1,6 +1,7 @@
-# Express Boilerplate
+# surveyed-app-api
+API for surveyed package
 
-This is a simple boilerplate organised to build higly scalable APIs
+Majorly for survey generation
 
 ### Run boilerplate code
 
@@ -10,6 +11,7 @@ This is a simple boilerplate organised to build higly scalable APIs
 - Go to `http://localhost:7000/api/users/all` to see it in action
 
 ```
+NODE_ENV=development
 PORT=7000
 MONGODB_URI=mongodb://<DB_USERNAME>:<DB_PASSWORD>@<DB_ADDRESS>:<DB_PORT>/<DB_NAME>
 ...

@@ -1,8 +1,18 @@
-/**
- * Export routes from here
- * Use these exported routes on /server/startup/routes
- */
+const express = require("express");
 
-const userRoutes = require("./api/users");
+const authRoutes = require("./auth");
 
-module.exports = { userRoutes };
+const router = express.Router();
+
+const defaultRoutes = [
+  {
+    path: "/auth",
+    route: authRoutes,
+  },
+];
+
+defaultRoutes.forEach((route) => {
+  router.use(route.path, route.route);
+});
+
+module.exports = router;

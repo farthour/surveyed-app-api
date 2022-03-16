@@ -1,15 +1,21 @@
-/**
- * Create base endpoints in this module
- * Import the routes that are exported from /server/routes/index.js
- */
-
-const { userRoutes } = require("../routes");
+const httpStatus = require("http-status");
 const { errorMiddleware } = require("./middlewares");
+const { ApiError } = require("../utils");
 
-module.exports = function(app) {
-  // All the routes below this line
-  app.use("/api/users", userRoutes);
+const routes = require("../routes");
 
-  // All the routes above this line
-  app.use(errorMiddleware);
+module.exports = function (app) {
+  // v1 api routes
+  app.use("/api/v1", routes);
+
+  // send back a 404 error for any unknown api request
+  app.use((req, res, next) => {
+    next(new ApiError(httpStatus.NOT_FOUND, "Not found"));
+  });
+
+  // convert error to ApiError if needed
+  app.use(errorMiddleware.errorConverter);
+
+  // handle error
+  app.use(errorMiddleware.errorHandler);
 };
