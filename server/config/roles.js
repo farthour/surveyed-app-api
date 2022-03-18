@@ -3,5 +3,5 @@ const allRoles = {
   MEMBER: [],
 };
 
-export const roles = Object.keys(allRoles);
-export const roleRights = new Map(Object.entries(allRoles));
+exports.roles = Object.keys(allRoles);
+exports.roleRights = new Map(Object.entries(allRoles));

@@ -2,6 +2,7 @@ const { Schema, model } = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
+const { toJSON } = require("./plugins");
 const { roles } = require("../config/roles");
 
 const userSchema = new Schema({
@@ -70,6 +71,8 @@ const userSchema = new Schema({
     default: false,
   },
 });
+
+userSchema.plugin(toJSON);
 
 // Check if email is taken
 userSchema.statics.isEmailTaken = async function (email) {

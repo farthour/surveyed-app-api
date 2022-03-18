@@ -1,5 +1,5 @@
-const {password} = require('./custom')
-const Joi = require('joi');
+const { password } = require("./custom");
+const Joi = require("joi");
 
 const register = {
   body: Joi.object().keys({
