@@ -14,12 +14,13 @@ const logger = winston.createLogger({
       ? "debug"
       : "info",
   format: winston.format.combine(
+    winston.format.timestamp(),
     enumerateErrorFormat(),
     // process.env.NODE_ENV === "development"
     //   ? winston.format.colorize()
     //   : winston.format.uncolorize(),
     winston.format.splat(),
-    winston.format.printf(({ level, message }) => `${level}: ${message}`)
+    winston.format.printf(({ level, message, timestamp }) => `${timestamp} ${level}: ${message}`)
   ),
   transports: [
 		new winston.transports.File({ filename: "error.log", level: "error" }),
