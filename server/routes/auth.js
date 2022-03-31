@@ -5,7 +5,7 @@ const catchAsync = require("../utils/catchAsync");
 const authValidation = require("../validations/auth");
 
 const authController = require("../controllers/auth");
-const { validateMiddleware } = require("../middlewares");
+const { validateMiddleware, authMiddleware } = require("../middlewares");
 
 /**
  * Register User
@@ -80,6 +80,7 @@ router.post(
  */
 router.post(
   "/send-email-verification",
+  authMiddleware(),
   validateMiddleware(authValidation.sendEmailVerification),
   catchAsync(authController.sendEmailVerification)
 );
@@ -93,6 +94,18 @@ router.post(
   "/verify-email",
   validateMiddleware(authValidation.verifyEmail),
   catchAsync(authController.verifyEmail)
+);
+
+/**
+ * Dummy Route
+ *
+ * @endpoint /api/v1/auth/dummy
+ */
+router.post(
+  "/dummy",
+  authMiddleware(),
+  // validateMiddleware(authValidation.verifyEmail),
+  catchAsync(authController.dummy)
 );
 
 module.exports = router;

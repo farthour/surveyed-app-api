@@ -45,14 +45,14 @@ const sendResetPasswordEmail = async (email, token) => {
 // Send verification email
 const sendEmailVerification = async (email, token, isRegistration) => {
   let textMessage = `Verify your email ${process.env.FRONTEND_URL}/${
-    isRegistration ? "register" : "account"
+    isRegistration ? "verify-email" : "account"
   }?token=${token}`;
 
   let htmlMessage = `
   <h2>Verify your email</h2>
   <br />
   <a href="${process.env.FRONTEND_URL}/${
-    isRegistration ? "register" : "account"
+    isRegistration ? "verify-email" : "account"
   }?token=${token}">Click here to Continue</a>
   `;
 

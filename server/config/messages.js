@@ -11,8 +11,9 @@ module.exports = {
       emailVerificationFailed: "Email verification failed",
       incorrectPassword: "Incorrect Password",
       tokenNotFound: "Token not found",
-      userWithEmailNotFound: "No user found with this email"
-
+      userWithEmailNotFound: "No user found with this email",
+      forbidden: "Forbidden",
+      invalidToken: "Invalid token type"
     },
   },
 };

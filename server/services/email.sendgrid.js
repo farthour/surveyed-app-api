@@ -42,7 +42,7 @@ const sendResetPasswordEmail = async (email, token) => {
 const sendEmailVerification = async (email, token, isRegistration) => {
   const templateData = {
     redirect_url: `${process.env.FRONTEND_URL}/${
-      isRegistration ? "register" : "account"
+      isRegistration ? "verify-email" : "account"
     }?token=${token}`,
   };
 

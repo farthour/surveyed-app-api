@@ -1,14 +1,16 @@
 require("dotenv").config();
 const express = require("express");
+const morgan = require("morgan");
 const logger = require("./config/logger");
 const app = express();
 
 logger.info(`starting env: ${process.env.NODE_ENV}`);
 
 // Middlewares
+app.use(morgan("dev"));
+require("./startup/db")();
 require("./startup/middlewares").networkMiddleware(app);
 require("./startup/routes")(app);
-require("./startup/db")();
 
 // Port config
 const port = process.env.PORT || 7000;

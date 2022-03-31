@@ -4,8 +4,8 @@
   "description": "API for surveyed package question generator app",
   "main": "server/app.js",
   "scripts": {
-    "clean": "rm -r ./server/models/user & rm -r ./server/routes/api/users & cat /dev/null > ./server/routes/index.js & sed -i '11,11d' ./server/startup/routes.js",
-    "server": "nodemon server/app.js"
+    "server": "nodemon server/app.js",
+    "debug": "node --inspect=9300 server/app.js"
   },
   "repository": {
     "type": "git",
@@ -43,6 +43,7 @@
     "winston-mongodb": "^5.0.7"
   },
   "devDependencies": {
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.15"
   }
 }

@@ -1,7 +1,3 @@
-// const catchAsync = fn => (...args) => fn(...args).catch(args[2])
-
-// module.exports = catchAsync;
-
 module.exports = (handler) => {
   return async (req, res, next) => {
     try {

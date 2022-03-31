@@ -90,24 +90,23 @@ const forgotPassword = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
-  console.log("1");
   const user = await authService.resetPassword(
     String(req.query.token),
     req.body.password
   );
-  console.log("2");
   const tokens = await tokenService.generateAuthTokens(user);
-  console.log("3");
-  res
-    .setHeader(
-      "Set-Cookie",
-      cookie.serialize("refreshToken", tokens.refresh.token, {
-        httpOnly: true,
-        maxAge: 60 * 60 * 24 * 7,
-        path: "/",
-      })
-    )
-    .send({ accessToken: tokens.access.token, user });
+  // res.redirect(301, `${process.env.FRONTEND_URL}/login`)
+  res.status(httpStatus.NO_CONTENT).send();
+  // res
+  // .setHeader(
+  //   "Set-Cookie",
+  //   cookie.serialize("refreshToken", tokens.refresh.token, {
+  //     httpOnly: true,
+  //     maxAge: 60 * 60 * 24 * 7,
+  //     path: "/",
+  //   })
+  // )
+  // .send({ accessToken: tokens.access.token, user });
 };
 
 const sendEmailVerification = async (req, res) => {
@@ -130,6 +129,10 @@ const verifyEmail = async (req, res) => {
   res.send({ user });
 };
 
+const dummy = (req, res) => {
+  res.send({ messages: "Successfull", user: req.user });
+};
+
 module.exports = {
   register,
   login,
@@ -139,4 +142,5 @@ module.exports = {
   resetPassword,
   sendEmailVerification,
   verifyEmail,
+  dummy,
 };
