@@ -11,7 +11,7 @@ const { ApiError } = require("../utils");
  * @param {NextFunction} next
  */
 const errorConverter = (err, req, res, next) => {
-  logger.info('errorConverter')
+  logger.info("errorConverter");
   let error = err;
   if (err) {
     const statusCode = error.statusCode || httpStatus.INTERNAL_SERVER_ERROR;
@@ -34,7 +34,7 @@ const errorConverter = (err, req, res, next) => {
  * @param {Response} res
  */
 const errorHandler = (err, req, res) => {
-  logger.info('errorHandler')
+  logger.info("errorHandler");
   let { statusCode, message } = err;
   if (process.env.NODE_ENV === "production" && !err.isOperational) {
     statusCode = httpStatus.INTERNAL_SERVER_ERROR;

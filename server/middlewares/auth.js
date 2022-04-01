@@ -4,7 +4,10 @@ const cookie = require("cookie");
 
 const { roleRights } = require("../config/roles");
 const ApiError = require("../utils/ApiError");
-const authMessages = require("../config/messages").auth;
+const {
+  auth: authMessages,
+  global: globalMessages,
+} = require("../config/messages");
 
 const verifyCallback =
   (req, resolve, reject, requiredRights = [], predicate) =>
@@ -36,7 +39,7 @@ const verifyCallback =
       );
       if (!hasRequiredRights && req.params.userId !== user.id) {
         return reject(
-          new ApiError(httpStatus.FORBIDDEN, authMessages.error.forbidden)
+          new ApiError(httpStatus.FORBIDDEN, globalMessages.error.forbidden)
         );
       }
     }
@@ -45,7 +48,7 @@ const verifyCallback =
       const predicateResult = await predicate(user, req);
       if (!predicateResult) {
         return reject(
-          new ApiError(httpStatus.FORBIDDEN, authMessages.error.forbidden)
+          new ApiError(httpStatus.FORBIDDEN, globalMessages.error.forbidden)
         );
       }
     }

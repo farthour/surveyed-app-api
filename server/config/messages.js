@@ -3,7 +3,6 @@ module.exports = {
     error: {
       emailAlreadyTaken: "An account with this email already exists",
       userNotFound: "User not found",
-      notFound: "Not found",
       invalidEmailPassword: "Invalid Email or Password",
       pleaseAuthenticate: "Please Authenticate",
       passwordResetFailed: "Password reset failed",
@@ -12,8 +11,15 @@ module.exports = {
       incorrectPassword: "Incorrect Password",
       tokenNotFound: "Token not found",
       userWithEmailNotFound: "No user found with this email",
+      invalidToken: "Invalid token type",
+    },
+  },
+  survey: {},
+  global: {
+    error: {
+      notFound: "Not found",
       forbidden: "Forbidden",
-      invalidToken: "Invalid token type"
+      internalServerError: "Something went wrong.",
     },
   },
 };

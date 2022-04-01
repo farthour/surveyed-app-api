@@ -2,7 +2,10 @@ const httpStatus = require("http-status");
 
 const logger = require("../config/logger");
 
-const authMessages = require("../config/messages").auth;
+const {
+  auth: authMessages,
+  global: globalMessages,
+} = require("../config/messages");
 
 const Token = require("../models/token");
 const TOKEN_TYPE = require("../config/token");
@@ -30,7 +33,7 @@ const logout = async (refreshToken) => {
     blacklisted: false,
   });
   if (!refreshTokenDoc) {
-    throw new ApiError(httpStatus.NOT_FOUND, authMessages.error.notFound);
+    throw new ApiError(httpStatus.NOT_FOUND, globalMessages.error.notFound);
   }
   await refreshTokenDoc.remove();
 };
@@ -95,7 +98,10 @@ const verifyEmail = async (verifyEmailToken) => {
     if (!user) {
       throw new Error();
     }
-    let deletedTokens = await Token.deleteMany({ user: user.id, type: TOKEN_TYPE.VERIFY_EMAIL });
+    let deletedTokens = await Token.deleteMany({
+      user: user.id,
+      type: TOKEN_TYPE.VERIFY_EMAIL,
+    });
     return await userService.updateUserById(user.id, { isEmailVerified: true });
   } catch (error) {
     logger.error(error);
