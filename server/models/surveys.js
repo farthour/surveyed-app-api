@@ -18,6 +18,10 @@ const surveySchema = new Schema({
       ref: "Question",
     },
   ],
+  created_by: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  }
 });
 
 surveySchema.plugin(toJSON);

@@ -96,16 +96,4 @@ router.post(
   catchAsync(authController.verifyEmail)
 );
 
-/**
- * Dummy Route
- *
- * @endpoint /api/v1/auth/dummy
- */
-router.post(
-  "/dummy",
-  authMiddleware(),
-  // validateMiddleware(authValidation.verifyEmail),
-  catchAsync(authController.dummy)
-);
-
 module.exports = router;

@@ -55,10 +55,6 @@ const questionSchema = new Schema({
   continue_after_delay: {
     type: Number,
   },
-  placeholder: {
-    type: String,
-    required: true,
-  },
   responses: [{ref: "QuestionResponse", required: true}],
   redirect_url: {
     type: String,
