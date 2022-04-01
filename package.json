@@ -5,7 +5,7 @@
   "main": "server/app.js",
   "scripts": {
     "server": "nodemon server/app.js",
-    "debug": "node --inspect=9300 server/app.js"
+    "debug": "nodemon --inspect=9300 server/app.js"
   },
   "repository": {
     "type": "git",
@@ -44,6 +44,6 @@
   },
   "devDependencies": {
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.4"
   }
 }
