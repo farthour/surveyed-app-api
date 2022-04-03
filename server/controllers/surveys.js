@@ -2,7 +2,10 @@ const httpStatus = require("http-status");
 
 const surveyService = require("../services/surveys");
 const { ApiError } = require("../utils");
-const { global: globalMessages } = require("../config/messages");
+const {
+  global: globalMessages,
+  survey: surveyMessages,
+} = require("../config/messages");
 
 const getAllSurveys = async (req, res) => {
   const surveys = await surveyService.getSurveysOfUser(req.user.id);
@@ -19,7 +22,33 @@ const createSurvey = async (req, res) => {
       globalMessages.error.internalServerError
     );
 
-  return res.status(httpStatus.OK).send({ survey });
+  return res.status(httpStatus.OK).send(survey);
+};
+
+const getSurveyDetails = async (req, res) => {
+  const survey = await surveyService.getSurveyDetailsById(req.params.id);
+
+  if (!survey)
+    throw new ApiError(
+      httpStatus.NOT_FOUND,
+      surveyMessages.error.surveyNotFound
+    );
+  return res.status(httpStatus.FOUND).send(survey);
+};
+
+const createSurveyQuestion = async (req, res) => {
+  const question = await surveyService.createQuestionOfSurvey(
+    req.params.id,
+    req.body
+  );
+
+  if (!question)
+    throw new ApiError(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      globalMessages.error.internalServerError
+    );
+
+  return res.status(httpStatus.OK).send(question);
 };
 
 const dummy = (req, res) => {
@@ -29,5 +58,7 @@ const dummy = (req, res) => {
 module.exports = {
   getAllSurveys,
   createSurvey,
+  getSurveyDetails,
+  createSurveyQuestion,
   dummy,
 };

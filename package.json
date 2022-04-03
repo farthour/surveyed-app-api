@@ -23,6 +23,7 @@
   "homepage": "https://github.com/amitad16/ExpressBoilerplate#readme",
   "dependencies": {
     "@sendgrid/mail": "^7.6.2",
+    "async": "^3.2.3",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "cookie": "^0.4.2",

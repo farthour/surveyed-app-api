@@ -28,6 +28,31 @@ router.post(
 );
 
 /**
+ * Get survey questions
+ *
+ * @endpoint /api/v1/surveys/:id
+ */
+router.get(
+  "/:id",
+  authMiddleware(),
+  validateMiddleware(surveyValidations.getSurveyQuestions),
+  catchAsync(surveysController.getSurveyDetails)
+);
+
+
+/**
+ * Create survey question
+ *
+ * @endpoint /api/v1/surveys/:id/questions/create
+ */
+ router.post(
+  "/:id/questions/create",
+  authMiddleware(),
+  validateMiddleware(surveyValidations.createSurveyQuestion),
+  catchAsync(surveysController.createSurveyQuestion)
+);
+
+/**
  * Dummy Route
  *
  * @endpoint /api/v1/surveys/dummy

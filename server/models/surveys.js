@@ -3,26 +3,31 @@ const validator = require("validator");
 
 const { toJSON } = require("./plugins");
 
-const surveySchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  description: {
-    type: String,
-  },
-  questions: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Question",
+const surveySchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true,
     },
-  ],
-  created_by: {
-    type: Schema.Types.ObjectId,
-    ref: "User"
+    description: {
+      type: String,
+    },
+    questions: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Question",
+      },
+    ],
+    created_by: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  },
+  {
+    timestamps: true,
   }
-});
+);
 
 surveySchema.plugin(toJSON);
 

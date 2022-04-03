@@ -14,7 +14,14 @@ module.exports = {
       invalidToken: "Invalid token type",
     },
   },
-  survey: {},
+  survey: {
+    error: {
+      surveyNotFound: "Survey not found",
+      creatingQuestionResponse: "Error in creating question response",
+      creatingQuestion: "Error in creating question",
+      addingQuestionToSurvey: "Error in adding question to survey",
+    },
+  },
   global: {
     error: {
       notFound: "Not found",
