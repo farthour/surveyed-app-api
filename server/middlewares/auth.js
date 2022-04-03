@@ -1,6 +1,7 @@
 const httpStatus = require("http-status");
 const passport = require("passport");
 const cookie = require("cookie");
+const jwt = require("jsonwebtoken");
 
 const { roleRights } = require("../config/roles");
 const ApiError = require("../utils/ApiError");
@@ -8,10 +9,21 @@ const {
   auth: authMessages,
   global: globalMessages,
 } = require("../config/messages");
+const { verifyToken } = require("../services/tokens");
+const TOKEN_TYPE = require("../config/token");
 
 const verifyCallback =
   (req, resolve, reject, requiredRights = [], predicate) =>
   async (err, user) => {
+    if (err || !user) {
+      return reject(
+        new ApiError(
+          httpStatus.UNAUTHORIZED,
+          authMessages.error.pleaseAuthenticate
+        )
+      );
+    }
+
     // if there is no refresh token and
     // req is given a stolen accessToken
     // then it will successfully execute
@@ -19,7 +31,17 @@ const verifyCallback =
     // for refreshTokens
     const cookies = req.headers.cookie && cookie.parse(req.headers.cookie);
 
-    if (err || !user || !cookies.refreshToken) {
+    // Check if refreshToken and accessToken are of same user
+    // accessToken is already decoded into 'user'
+    // So, we will check both ids are same
+    try {
+      const refreshTokenData = await verifyToken(
+        cookies?.refreshToken,
+        TOKEN_TYPE.REFRESH
+      );
+      if (refreshTokenData.user.id !== user.id)
+        throw Error(authMessages.error.pleaseAuthenticate);
+    } catch (err) {
       return reject(
         new ApiError(
           httpStatus.UNAUTHORIZED,
